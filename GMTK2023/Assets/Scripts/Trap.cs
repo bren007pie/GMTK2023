@@ -6,9 +6,9 @@ public class Trap : MonoBehaviour
 {
     // for now attack and defense debuffs should be negative
 
-    [Tooltip("HERO Attack debug on traps, must be negative value ")]
+    [Tooltip("HERO Attack debuff on traps, must be negative value ")]
     public int Attack_Debuff; // 
-    [Tooltip("HERO defense debug on traps, must be negative value ")]
+    [Tooltip("HERO defense debuff on traps, must be negative value ")]
     public int Defense_Debuff;
 
     // checks to make sure, if change in editor during playing we're fucked
