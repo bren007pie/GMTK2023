@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1823161768125009205}
   - component: {fileID: 7623294437528290920}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3747769806902872354}
   - component: {fileID: 2415407297535518294}
   - component: {fileID: 3023659397910910863}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Acid Vat Trap
   m_TagString: Untagged
   m_Icon: {fileID: 0}

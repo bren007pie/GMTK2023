@@ -26,7 +26,7 @@ public class LayoutController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isLayoutPhase && !EndPlacementButton.activeSelf) // if is layout phase should take control of the sequence
+        if (isLayoutPhase) // if is layout phase should take control of the sequence
         {
             EndPlacementButton.SetActive(true); // turn on button until done placing
         }
