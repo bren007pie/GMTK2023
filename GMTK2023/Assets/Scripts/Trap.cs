@@ -6,21 +6,37 @@ public class Trap : MonoBehaviour
 {
     // for now attack and defense debuffs should be negative
 
-    [Tooltip("HERO Attack debug on traps, must be negative value ")]
-    public int Attack_Debuff = 0; // 
-    [Tooltip("HERO defense debug on traps, must be negative value ")]
-    public int Defense_Debuff = 0;
+    [Tooltip("HERO Defense die debuff on traps, must be negative value ")]
+    [SerializeField] int DEF_die_debuff = 0;
+    [Tooltip("HERO Defense bonus debuff on traps, must be negative value ")]
+    [SerializeField] int DEF_bonus_debuff = 0;
+    [Tooltip("HERO Attack die debuff on traps, must be negative value ")]
+    [SerializeField] int ATK_die_debuff = 0;
+    [Tooltip("HERO Attack bonus debuff on traps, must be negative value ")]
+    [SerializeField] int ATK_bonus_debuff = 0;
+
+
 
     // checks to make sure, if change in editor during playing we're fucked
     private void Awake()
     {
-        if (Attack_Debuff > 0)
+        if (DEF_die_debuff > 0)
         {
-            Debug.LogWarning("ATTACK DEBUG MUST BE NEGATIVE");
+            Debug.LogWarning("DEFENSE DIE DEBUFF MUST BE NEGATIVE");
         }
-        if (Defense_Debuff > 0)
+        if (DEF_bonus_debuff > 0)
         {
-            Debug.LogWarning("DEFENSE DEBUG MUST BE NEGATIVE");
+            Debug.LogWarning("DEFENSE BONUS DEBUFF MUST BE NEGATIVE");
+        }
+        if (ATK_die_debuff > 0)
+        {
+            Debug.LogWarning("ATTACK DIE DEBUFF MUST BE NEGATIVE");
+        }
+        if (ATK_bonus_debuff > 0)
+        {
+            Debug.LogWarning("ATTACK BONUS DEBUFF MUST BE NEGATIVE");
         }
     }
+
+    // TODO add for X number of layers
 }

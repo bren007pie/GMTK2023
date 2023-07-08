@@ -15,6 +15,7 @@ public class MasterController : MonoBehaviour
     Vector3 nextPosition;
     RoomControl[] availableRooms;
 
+    // flags for controlling phases
     bool isSetupPhase = true;
     bool isLayoutPhase = false;
     bool isWalkingPhase = false;
@@ -23,8 +24,8 @@ public class MasterController : MonoBehaviour
 
 
     public float stepSize = 0.03f;
-    
-    // Start is called before the first frame update
+
+    // Setup Phase
     void Start()
     {
 
@@ -39,7 +40,7 @@ public class MasterController : MonoBehaviour
     }
 
 
-    // Update is called once per frame
+    // Main loop with all the phases going together
     void Update()
     {
         if (isLayoutPhase)
@@ -80,7 +81,7 @@ public class MasterController : MonoBehaviour
 
     private void layoutPhaseLoop()
     {
-
+        // this is where we'll put the selection
     }
 
     private void respondingPhaseLoop()
@@ -158,6 +159,6 @@ public class MasterController : MonoBehaviour
         do
         {
             roomForPowerUp = availableRoomsForPowerUps[UnityEngine.Random.Range(0, availableRoomsForPowerUps.Length)];
-        } while (roomForPowerUp.powerUp != null);
+        } while (roomForPowerUp.powerUp != null); // placing thing in the public variable of the room
     }
 }
