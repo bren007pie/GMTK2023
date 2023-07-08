@@ -7,13 +7,13 @@ public class Trap : MonoBehaviour
     // for now attack and defense debuffs should be negative
 
     [Tooltip("HERO Defense die debuff on traps, must be negative value ")]
-    [SerializeField] int DEF_die_debuff = 0;
+    public int DEF_die_debuff = 0;
     [Tooltip("HERO Defense bonus debuff on traps, must be negative value ")]
-    [SerializeField] int DEF_bonus_debuff = 0;
+    public int DEF_bonus_debuff = 0;
     [Tooltip("HERO Attack die debuff on traps, must be negative value ")]
-    [SerializeField] int ATK_die_debuff = 0;
+    public int ATK_die_debuff = 0;
     [Tooltip("HERO Attack bonus debuff on traps, must be negative value ")]
-    [SerializeField] int ATK_bonus_debuff = 0;
+    public int ATK_bonus_debuff = 0;
 
 
 
