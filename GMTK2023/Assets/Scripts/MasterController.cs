@@ -9,14 +9,10 @@ public class MasterController : MonoBehaviour
     public GameObject heroToken;
     public PowerUp[] availablePowerUpsForRooms;
     public RoomControl[] availableRoomsForPowerUps;
-<<<<<<< HEAD
-    public LayoutController layoutController;
-=======
     public FightManager fightManager;
     Minion minionInCurrentRoom;
     Trap trapInCurrentRoom;
     PowerUp powerUpInCurrentRoom;
->>>>>>> 0082b8b33deefd14af3789216aa9ab95b150a5fe
     RoomControl roomForPowerUp;
     RoomControl currentRoom;
     RoomControl nextRoom;
