@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Minion : MonoBehaviour
+public class Hero : MonoBehaviour
 {
-    [SerializeField] int Health = 18;
-    [SerializeField] int MaxHealth = 18;
-    [SerializeField] int DEF_die = 4;
+
+    [SerializeField] int Health = 50;
+    [SerializeField] int MaxHealth = 50;
+    [SerializeField] int DEF_die = 6;
     [SerializeField] int DEF_bonus = 0;
-    [SerializeField] int ATK_die = 6;
-    [SerializeField] int ATK_bonus = 0;
-    [SerializeField] int ATK_mult = 3;
+    [SerializeField] int ATK_die = 8;
+    [SerializeField] int ATK_bonus = 2;
 
 
     // Start is called before the first frame update
@@ -30,7 +30,6 @@ public class Minion : MonoBehaviour
     public int getDEF_bonus() { return DEF_bonus; }
     public int getATK_die() { return ATK_die; }
     public int getATK_bonus() { return ATK_bonus; }
-    public int getATK_mult() { return ATK_mult; }
 
     public int damage(int damage)
     {
@@ -69,11 +68,6 @@ public class Minion : MonoBehaviour
         ATK_bonus += change;
         return ATK_bonus;
     }
-    public int changeATK_mult(int change)
-    {
-        ATK_mult += change;
-        return ATK_mult;
-    }
 
     public int getMaxHealth() { return MaxHealth; }
     public int setMaxHealth(int newMax)
@@ -88,4 +82,5 @@ public class Minion : MonoBehaviour
     {
 
     }
+
 }
