@@ -18,6 +18,7 @@ public class MasterController : MonoBehaviour
     RoomControl nextRoom;
     Vector3 nextPosition;
     RoomControl[] availableRooms;
+    public LayoutController layoutController;
 
     // flags for controlling phases
     bool isSetupPhase = true;
@@ -39,7 +40,7 @@ public class MasterController : MonoBehaviour
 
         endPhase();
 
-        startFightPhase();
+        startLayoutPhase();
 
     }
 
@@ -47,24 +48,26 @@ public class MasterController : MonoBehaviour
     // Main loop with all the phases going together
     void Update()
     {
-        if (isLayoutPhase)
+        if (isLayoutPhase) // this blocks control until layout is done
         {
             layoutPhaseLoop();
         }
 
-        else if (isWalkingPhase)
+        else if (isRespondingPhase)
         {
-            walkingPhaseLoop();
+            respondingPhaseLoop();
         }
+
 
         else if (isFightPhase)
         {
             fightPhaseLoop();
         }
 
-        else if (isRespondingPhase)
+
+        else if (isWalkingPhase)
         {
-            respondingPhaseLoop();
+            walkingPhaseLoop();
         }
     }
 
@@ -111,7 +114,12 @@ public class MasterController : MonoBehaviour
 
     private void layoutPhaseLoop()
     {
-
+        // while wait and hand over "control" to the layout phase
+        if (layoutController.isLayoutPhase == false)
+        {
+            endPhase();
+            startWalkingPhase();
+        }
         // this is where we'll put the selection
     }
 
