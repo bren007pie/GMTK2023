@@ -9,6 +9,10 @@ public class MasterController : MonoBehaviour
     public GameObject heroToken;
     public PowerUp[] availablePowerUpsForRooms;
     public RoomControl[] availableRoomsForPowerUps;
+    public FightManager fightManager;
+    Minion minionInCurrentRoom;
+    Trap trapInCurrentRoom;
+    PowerUp powerUpInCurrentRoom;
     RoomControl roomForPowerUp;
     RoomControl currentRoom;
     RoomControl nextRoom;
@@ -35,7 +39,7 @@ public class MasterController : MonoBehaviour
 
         endPhase();
 
-        startLayoutPhase();
+        startFightPhase();
 
     }
 
@@ -48,17 +52,17 @@ public class MasterController : MonoBehaviour
             layoutPhaseLoop();
         }
 
-        if (isWalkingPhase)
+        else if (isWalkingPhase)
         {
             walkingPhaseLoop();
         }
 
-        if (isFightPhase)
+        else if (isFightPhase)
         {
             fightPhaseLoop();
         }
 
-        if (isRespondingPhase)
+        else if (isRespondingPhase)
         {
             respondingPhaseLoop();
         }
@@ -67,10 +71,34 @@ public class MasterController : MonoBehaviour
     private void startFightPhase()
     {
         isFightPhase = true;
+
+        minionInCurrentRoom = null;
+        trapInCurrentRoom = null;
+
+        if(currentRoom.resource != null)
+        {
+            minionInCurrentRoom = currentRoom.resource.GetComponent<Minion>();
+            trapInCurrentRoom = currentRoom.resource.GetComponent<Trap>();
+
+        }
+        //powerUpInCurrentRoom = currentRoom.powerUp.GetComponent<PowerUp>();
+
+        if(minionInCurrentRoom != null) { fightManager.minion = minionInCurrentRoom; fightManager.isFightPhase = true; }
+        //if(trapInCurrentRoom != null) { }
+        
     }
     private void fightPhaseLoop()
     {
+        if(fightManager.isFightPhase == false)
+        {
+            endPhase();
+            startRespondingPhase();
+        }
+    }
 
+    private void startRespondingPhase()
+    {
+        isRespondingPhase = true;
     }
 
     private void startLayoutPhase()
@@ -86,20 +114,19 @@ public class MasterController : MonoBehaviour
 
     private void respondingPhaseLoop()
     {
-
-        selectNextRoom();
         endPhase();
         startWalkingPhase();
     }
 
     private void startWalkingPhase()
     {
+        selectNextRoom();
         isWalkingPhase = true;
     }
 
     void walkingPhaseLoop()
     {
-        if ((heroToken.transform.position - nextPosition).magnitude > 0.05) { step(); }
+        if ((heroToken.transform.position - nextPosition).magnitude > 0.02) { step(); }
 
         else
         {
@@ -113,16 +140,18 @@ public class MasterController : MonoBehaviour
 
     void endPhase()
     {
-        bool isSetupPhase = false;
-        bool isLayoutPhase = false;
-        bool isWalkingPhase = false;
-        bool isRespondingPhase = false;
-        bool isFightPhase = false;
+        isSetupPhase = false;
+        isLayoutPhase = false;
+        isWalkingPhase = false;
+        isRespondingPhase = false;
+        isFightPhase = false;
     }
 
     void step()
     {
         heroToken.transform.position += (nextPosition - heroToken.transform.position).normalized * stepSize;
+        //heroToken.transform.position = nextPosition;
+    
     }
 
     void selectNextRoom()
@@ -149,9 +178,6 @@ public class MasterController : MonoBehaviour
     void setupHeroToken()
     {
         currentRoom = FindAnyObjectByType<FirstRoom>().GetComponent<RoomControl>();
-        availableRooms = currentRoom.rooms;
-        nextRoom = availableRooms[UnityEngine.Random.Range(0, availableRooms.Length - 1)];
-        nextPosition = nextRoom.transform.position + Vector3.up * 1;
     }
 
     void getRandomRoom()
