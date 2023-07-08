@@ -6,7 +6,8 @@ using UnityEngine;
 public class FightManager : MonoBehaviour
 {
     Hero hero;
-    Minion minion;
+    public Minion minion;
+    public bool isFightPhase = false;
 
     int minionAtk = 0;
     int heroAtk = 0;
@@ -17,19 +18,22 @@ public class FightManager : MonoBehaviour
     void Start()
     {
         hero = FindAnyObjectByType<Hero>().GetComponent<Hero>();
-        minion = FindAnyObjectByType<Minion>().GetComponent<Minion>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        while (hero.getHealth() > 0 && minion.getHealth() > 0)
+        if (isFightPhase)
         {
-            turn();
-
+            if (hero.getHealth() > 0 && minion.getHealth() > 0)
+            {
+                turn();
+            }
+            else
+            {
+                isFightPhase = false;
+            }
         }
-
-        //turn();
     }
 
     void turn()
