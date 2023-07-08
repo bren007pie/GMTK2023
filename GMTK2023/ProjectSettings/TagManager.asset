@@ -15,8 +15,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - RESOURCES
+  - ROOM
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Room
+    uniqueID: 2753752473
+    locked: 0
+  - name: Powerup
+    uniqueID: 239142937
+    locked: 0
+  - name: Resource
+    uniqueID: 2211132463
     locked: 0
