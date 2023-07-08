@@ -7,6 +7,7 @@ using UnityEngine;
 public class MasterController : MonoBehaviour
 {
     public GameObject heroToken;
+    public Hero hero;
     public PowerUp[] availablePowerUpsForRooms;
     public RoomControl[] availableRoomsForPowerUps;
     public FightManager fightManager;
@@ -77,26 +78,56 @@ public class MasterController : MonoBehaviour
 
         minionInCurrentRoom = null;
         trapInCurrentRoom = null;
+        powerUpInCurrentRoom = null;
 
-        if(currentRoom.resource != null)
+        if (currentRoom.resource != null)
         {
             minionInCurrentRoom = currentRoom.resource.GetComponent<Minion>();
             trapInCurrentRoom = currentRoom.resource.GetComponent<Trap>();
 
         }
-        //powerUpInCurrentRoom = currentRoom.powerUp.GetComponent<PowerUp>();
+        if(currentRoom.powerUp != null)
+        {
+            powerUpInCurrentRoom = currentRoom.powerUp.GetComponent<PowerUp>();
+        }
 
         if(minionInCurrentRoom != null) { fightManager.minion = minionInCurrentRoom; fightManager.isFightPhase = true; }
-        //if(trapInCurrentRoom != null) { }
+        if(trapInCurrentRoom != null) { handleTrap(); }
         
     }
+
+    private void handleTrap()
+    {
+        hero.changeATK_bonus(trapInCurrentRoom.ATK_bonus_debuff);
+        hero.changeATK_die(trapInCurrentRoom.ATK_die_debuff);
+        hero.changeDEF_bonus(trapInCurrentRoom.DEF_bonus_debuff);
+        hero.changeDEF_die(trapInCurrentRoom.DEF_die_debuff);
+
+        if (trapInCurrentRoom.ATK_bonus_debuff + trapInCurrentRoom.ATK_die_debuff < 0) { Debug.Log("The Hero's leg got caught in a bear trap in the dungeon room! His ATK has gone down!"); }
+        if (trapInCurrentRoom.DEF_bonus_debuff + trapInCurrentRoom.DEF_die_debuff < 0) { Debug.Log("A vat of acid fell onto the Hero's armour in the dungeon room! His DEF has gone down!"); }
+    }
+
     private void fightPhaseLoop()
     {
         if(fightManager.isFightPhase == false)
         {
+            if(hero.getHealth() > 0 && powerUpInCurrentRoom != null) { handlePowerup(); }
             endPhase();
             startRespondingPhase();
         }
+    }
+
+    private void handlePowerup()
+    {
+        hero.heal(powerUpInCurrentRoom.healing);
+        hero.changeATK_bonus(powerUpInCurrentRoom.atk_bonus);
+        hero.changeATK_die(powerUpInCurrentRoom.atk_die);
+        hero.changeDEF_bonus(powerUpInCurrentRoom.def_bonus);
+        hero.changeDEF_die(powerUpInCurrentRoom.atk_die);
+
+        if (powerUpInCurrentRoom.healing > 0) { Debug.Log("The Hero was healed for " + powerUpInCurrentRoom.healing + " HP by the health potion he found in the dungeon room."); }
+        if (powerUpInCurrentRoom.atk_bonus + powerUpInCurrentRoom.atk_die > 0) { Debug.Log("The Hero found a new sword in the dungeon room. His ATK has gone up!"); }
+        if (powerUpInCurrentRoom.def_bonus + powerUpInCurrentRoom.def_die > 0) { Debug.Log("The Hero found a new shield in the dungeon room. His DEF has gone up!"); }
     }
 
     private void startRespondingPhase()
