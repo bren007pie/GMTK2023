@@ -9,6 +9,7 @@ public class MasterController : MonoBehaviour
     public GameObject heroToken;
     public PowerUp[] availablePowerUpsForRooms;
     public RoomControl[] availableRoomsForPowerUps;
+    public LayoutController layoutController;
     RoomControl roomForPowerUp;
     RoomControl currentRoom;
     RoomControl nextRoom;
@@ -76,11 +77,14 @@ public class MasterController : MonoBehaviour
     private void startLayoutPhase()
     {
         isLayoutPhase = true;
+        layoutController.isLayoutPhase = true; // sets the LayoutController.cs variable to be active so will start
+
     }
 
 
     private void layoutPhaseLoop()
     {
+
         // this is where we'll put the selection
     }
 

@@ -88,9 +88,4 @@ public class Minion : MonoBehaviour
     {
 
     }
-
-    void move()
-    {
-
-    }
 }
