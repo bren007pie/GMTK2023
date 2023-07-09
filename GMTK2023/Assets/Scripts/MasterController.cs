@@ -20,6 +20,9 @@ public class MasterController : MonoBehaviour
     Vector3 nextPosition;
     RoomControl[] availableRooms;
     public LayoutController layoutController;
+    public GameObject CombatView; // The Parent object of all the combat ones
+    public GameObject BigGoob;
+    public GameObject ThreeGobalins;
 
     // flags for controlling phases
     bool isSetupPhase = true;
@@ -76,6 +79,7 @@ public class MasterController : MonoBehaviour
     {
         isFightPhase = true;
 
+
         minionInCurrentRoom = null;
         trapInCurrentRoom = null;
         powerUpInCurrentRoom = null;
@@ -91,7 +95,26 @@ public class MasterController : MonoBehaviour
             powerUpInCurrentRoom = currentRoom.powerUp.GetComponent<PowerUp>();
         }
 
-        if(minionInCurrentRoom != null) { fightManager.minion = minionInCurrentRoom; fightManager.isFightPhase = true; }
+        if(minionInCurrentRoom != null) { 
+            fightManager.minion = minionInCurrentRoom; 
+            fightManager.isFightPhase = true;
+
+            // making screen active, only goes when isFightPhase is active
+            CombatView.SetActive(true); // combat screen up
+            if (minionInCurrentRoom.name == "Big Goob")
+            {
+                BigGoob.SetActive(true);
+            }
+            else if (minionInCurrentRoom.name == "3 Gobalins")
+            {
+                ThreeGobalins.SetActive(true);
+            }
+            else
+            {
+                Debug.LogWarning("The minion in room " + currentRoom.name + " does not match any of the minion names");
+            }
+
+        }
         if(trapInCurrentRoom != null) { handleTrap(); }
         
     }
@@ -116,6 +139,9 @@ public class MasterController : MonoBehaviour
         if(fightManager.isFightPhase == false)
         {
             if(hero.getHealth() > 0 && powerUpInCurrentRoom != null) { handlePowerup(); }
+            CombatView.SetActive(false); // combat screen down and remove goblins
+            BigGoob.SetActive(false);
+            ThreeGobalins.SetActive(false);
             endPhase();
             startRespondingPhase();
         }
