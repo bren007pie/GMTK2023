@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2728742284014669867
 MonoBehaviour:
@@ -64,4 +64,16 @@ MonoBehaviour:
   - {fileID: 0}
   fightManager: {fileID: 0}
   layoutController: {fileID: 0}
-  stepSize: 0.01
+  CombatView: {fileID: 0}
+  BigGoob: {fileID: 0}
+  ThreeGobalins: {fileID: 0}
+  MainUi: {fileID: 0}
+  WinScreen: {fileID: 0}
+  LoseScreen: {fileID: 0}
+  PlaceMusic: {fileID: 0}
+  CombatMusic: {fileID: 0}
+  GameOverSound: {fileID: 0}
+  BossVictorySound: {fileID: 0}
+  PowerUpSound: {fileID: 0}
+  DeathSound: {fileID: 0}
+  stepSize: 3

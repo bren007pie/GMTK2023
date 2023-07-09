@@ -45,7 +45,7 @@ public class MasterController : MonoBehaviour
     bool isFightPhase = false;
 
 
-    public float stepSize = 0.05f;
+    public float stepSize = 200f;
 
     // Setup Phase
     void Start()
@@ -249,7 +249,7 @@ public class MasterController : MonoBehaviour
 
     void step()
     {
-        heroToken.transform.position += (nextPosition - heroToken.transform.position).normalized * stepSize;
+        heroToken.transform.position += (nextPosition - heroToken.transform.position).normalized * stepSize * Time.deltaTime;
         //heroToken.transform.position = nextPosition;
     
     }
