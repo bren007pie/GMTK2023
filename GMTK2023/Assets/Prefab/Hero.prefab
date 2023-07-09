@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2394810609550052013}
   - component: {fileID: 280195645245480590}
+  - component: {fileID: -1971520099081245787}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -135,3 +136,19 @@ MonoBehaviour:
   DEF_bonus: 0
   ATK_die: 8
   ATK_bonus: 2
+  HPText: {fileID: 0}
+  ATKText: {fileID: 0}
+  DEFText: {fileID: 0}
+--- !u!114 &-1971520099081245787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323203685758904380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a666424cda031374cb8fd035e4fa773e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7226282583795477424}
   - component: {fileID: 1673402715307010909}
   - component: {fileID: 3415425095323115776}
+  - component: {fileID: -8833115512540327376}
   m_Layer: 0
   m_Name: ATKUp
   m_TagString: Untagged
@@ -102,3 +103,16 @@ MonoBehaviour:
   atk_bonus: 1
   def_die: 0
   def_bonus: 0
+--- !u!114 &-8833115512540327376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6700832490748979777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a666424cda031374cb8fd035e4fa773e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 
