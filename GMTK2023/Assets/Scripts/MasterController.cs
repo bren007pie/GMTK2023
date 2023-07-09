@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Build.Reporting;
 using UnityEngine;
 
 public class MasterController : MonoBehaviour
@@ -30,7 +29,7 @@ public class MasterController : MonoBehaviour
     bool isFightPhase = false;
 
 
-    public float stepSize = 0.03f;
+    public float stepSize = 0.05f;
 
     // Setup Phase
     void Start()
@@ -110,6 +109,10 @@ public class MasterController : MonoBehaviour
 
     private void fightPhaseLoop()
     {
+        if (hero.getHealth() < 1)
+        {
+            lose();
+        }
         if(fightManager.isFightPhase == false)
         {
             if(hero.getHealth() > 0 && powerUpInCurrentRoom != null) { handlePowerup(); }
@@ -118,8 +121,13 @@ public class MasterController : MonoBehaviour
         }
     }
 
+
     private void handlePowerup()
     {
+        if (powerUpInCurrentRoom.win == true)
+        {
+            win();
+        }
         hero.heal(powerUpInCurrentRoom.healing);
         hero.changeATK_bonus(powerUpInCurrentRoom.atk_bonus);
         hero.changeATK_die(powerUpInCurrentRoom.atk_die);
@@ -130,6 +138,7 @@ public class MasterController : MonoBehaviour
         if (powerUpInCurrentRoom.atk_bonus + powerUpInCurrentRoom.atk_die > 0) { Debug.Log("The Hero found a new sword in the dungeon room. His ATK has gone up!"); }
         if (powerUpInCurrentRoom.def_bonus + powerUpInCurrentRoom.def_die > 0) { Debug.Log("The Hero found a new shield in the dungeon room. His DEF has gone up!"); }
     }
+
 
     private void startRespondingPhase()
     {
@@ -169,7 +178,7 @@ public class MasterController : MonoBehaviour
 
     void walkingPhaseLoop()
     {
-        if ((heroToken.transform.position - nextPosition).magnitude > 0.02) { step(); }
+        if ((heroToken.transform.position - nextPosition).magnitude > 0.06) { step(); }
 
         else
         {
@@ -243,7 +252,7 @@ public class MasterController : MonoBehaviour
         for (int i = 0; i < availablePowerUpsForRooms.Length; i++)
         {
             getRandomRoom();
-            availablePowerUpsForRooms[i].transform.position = roomForPowerUp.transform.position + Vector3.right * 0.5f;
+            availablePowerUpsForRooms[i].transform.position = roomForPowerUp.transform.position + Vector3.right * 1f + Vector3.down * 0.5f;
             roomForPowerUp.powerUp = availablePowerUpsForRooms[i];
         }
     }
@@ -260,4 +269,14 @@ public class MasterController : MonoBehaviour
             roomForPowerUp = availableRoomsForPowerUps[UnityEngine.Random.Range(0, availableRoomsForPowerUps.Length)];
         } while (roomForPowerUp.powerUp != null); // placing thing in the public variable of the room
     }
+
+    private void win()
+    {
+
+    }
+    private void lose()
+    {
+
+    }
+
 }

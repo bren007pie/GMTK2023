@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
+    public bool win = false;
     public int healing = 0;
     
     public int atk_die = 0;
