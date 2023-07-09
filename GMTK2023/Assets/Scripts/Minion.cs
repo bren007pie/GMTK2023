@@ -11,6 +11,7 @@ public class Minion : MonoBehaviour
     [SerializeField] int ATK_die = 6;
     [SerializeField] int ATK_bonus = 1;
     [SerializeField] int ATK_mult = 3;
+    public string name = "3 Gobalins";
 
 
     // Start is called before the first frame update
