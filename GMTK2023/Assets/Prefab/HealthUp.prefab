@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8822882b0f483504ca23f972b6012f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healing: 30
+  healing: 10
   atk_die: 0
   atk_bonus: 0
   def_die: 0

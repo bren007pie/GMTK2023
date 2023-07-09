@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
@@ -201,7 +202,37 @@ public class MasterController : MonoBehaviour
         availableRooms = currentRoom.rooms;
         if(availableRooms.Length > 0)
         {
-            nextRoom = availableRooms[UnityEngine.Random.Range(0, availableRooms.Length)];
+            int[] roomRating = new int[availableRooms.Length];
+            int highestValue = -10;
+            int highestIndex = -10;
+            
+            for(int i = 0; i < roomRating.Length; i++)
+            {
+                roomRating[i] = 0;
+                if (availableRooms[i].powerUp == null || availableRooms[i].powerUp.healing>0)
+                {
+                    roomRating[i] -= 1;
+                }
+                else if ( (float)hero.getHealth()/ (float)hero.getMaxHealth() < 0.5f && availableRooms[i].powerUp.healing>0)
+                {
+                    roomRating[i] += 4;
+                }
+
+                if (availableRooms[i].resource == null)
+                {
+                    roomRating[i] += 1;
+                }
+
+                if (roomRating[i] > highestValue)
+                {
+                    highestIndex = i;
+                    highestValue = roomRating[i];
+                }
+            }
+
+            nextRoom = availableRooms[highestIndex];
+
+            //nextRoom = availableRooms[UnityEngine.Random.Range(0, availableRooms.Length)];
         }
         nextPosition = nextRoom.transform.position + Vector3.up * 1;
     }

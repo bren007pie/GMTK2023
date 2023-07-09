@@ -52,8 +52,8 @@ MonoBehaviour:
   MaxHealth: 20
   DEF_die: 4
   DEF_bonus: 0
-  ATK_die: 6
-  ATK_bonus: 1
+  ATK_die: 8
+  ATK_bonus: 2
   ATK_mult: 3
 --- !u!61 &8672463068642425175
 BoxCollider2D:

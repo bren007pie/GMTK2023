@@ -40,7 +40,7 @@ public class Hero : MonoBehaviour
 
     public int heal(int healing)
     {
-        if (Health + healing > MaxHealth) { Health += healing; }
+        if (Health + healing < MaxHealth) { Health += healing; }
         else { Health = MaxHealth; }
         return Health;
     }
