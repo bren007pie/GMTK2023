@@ -243,7 +243,7 @@ public class MasterController : MonoBehaviour
 
             //nextRoom = availableRooms[UnityEngine.Random.Range(0, availableRooms.Length)];
         }
-        nextPosition = nextRoom.transform.position + Vector3.up * 1;
+        nextPosition = nextRoom.transform.position + Vector3.up * 2;
     }
 
 
