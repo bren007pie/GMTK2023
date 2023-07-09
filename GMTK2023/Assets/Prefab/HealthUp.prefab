@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7043705018669389177}
   - component: {fileID: 8738721255968634092}
   - component: {fileID: 2505039896953662409}
+  - component: {fileID: 8539827072559586800}
   m_Layer: 0
   m_Name: HealthUp
   m_TagString: Untagged
@@ -102,3 +103,16 @@ MonoBehaviour:
   atk_bonus: 0
   def_die: 0
   def_bonus: 0
+--- !u!114 &8539827072559586800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2284837674191327755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a666424cda031374cb8fd035e4fa773e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 

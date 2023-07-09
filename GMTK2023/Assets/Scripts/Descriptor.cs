@@ -8,6 +8,17 @@ public class Descriptor : MonoBehaviour
 
     public string get_map_description()
     {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public string get_map_description()
+    {
         description = "";
         if (gameObject.TryGetComponent<Trap>(out Trap trap))
         {
@@ -22,7 +33,7 @@ public class Descriptor : MonoBehaviour
         }
         else if (gameObject.TryGetComponent<Minion>(out Minion minion))
         {
-            description = minion.name + "\nHP " + minion.getMaxHealth() + "\nATK " + minion.getATK_mult() + "D" + minion.getATK_die() + " + " + minion.getATK_bonus() + "\n DEF D" + minion.getDEF_die() + " + " + minion.getDEF_bonus();
+            description = minion.name + "\nHP " + minion.getHealth() + "/" + minion.getMaxHealth() + "\nATK " + minion.getATK_mult() + "D" + minion.getATK_die() + " + " + minion.getATK_bonus() + "\n DEF D" + minion.getDEF_die() + " + " + minion.getDEF_bonus();
         }
         else if (gameObject.TryGetComponent<PowerUp>(out PowerUp powerUp))
         {
@@ -39,6 +50,11 @@ public class Descriptor : MonoBehaviour
                 description = "Shield\n+ D" + powerUp.def_die + " + " + powerUp.def_bonus;
             }
         }
+        else if (gameObject.TryGetComponent<Hero>(out Hero hero))
+        {
+            description = "Hero\nHP " + hero.getHealth() + "/" + hero.getMaxHealth() + "\nATK " + "D" + hero.getATK_die() + " + " + hero.getATK_bonus() + "\n DEF D" + hero.getDEF_die() + " + " + hero.getDEF_bonus();
+        }
+
         return description;
     }
 }
