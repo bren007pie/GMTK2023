@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 public class MasterController : MonoBehaviour
@@ -35,6 +34,8 @@ public class MasterController : MonoBehaviour
     public AudioSource CombatMusic;
     public AudioSource GameOverSound;
     public AudioSource BossVictorySound;
+    public AudioSource PowerUpSound;
+    public AudioSource DeathSound;
 
     // flags for controlling phases
     bool isSetupPhase = true;
@@ -175,6 +176,8 @@ public class MasterController : MonoBehaviour
         hero.changeATK_die(powerUpInCurrentRoom.atk_die);
         hero.changeDEF_bonus(powerUpInCurrentRoom.def_bonus);
         hero.changeDEF_die(powerUpInCurrentRoom.atk_die);
+
+        PowerUpSound.Play();
 
         if (powerUpInCurrentRoom.healing > 0) { Debug.Log("The Hero was healed for " + powerUpInCurrentRoom.healing + " HP by the health potion he found in the dungeon room."); }
         if (powerUpInCurrentRoom.atk_bonus + powerUpInCurrentRoom.atk_die > 0) { Debug.Log("The Hero found a new sword in the dungeon room. His ATK has gone up!"); }
@@ -319,9 +322,10 @@ public class MasterController : MonoBehaviour
     {
         endPhase();
         MainUi.SetActive(false);
-        WinScreen.SetActive(true);
+        LoseScreen.SetActive(true);
         CombatMusic.Stop();
         BossVictorySound.Play();
+        DeathSound.Play();
         GameObject.Destroy(MainUi); // Fuckin nuke it
         GameObject.Destroy(fightManager);
         Time.timeScale = 0f; // pauses game so we don't have to fix a bug!
@@ -331,7 +335,7 @@ public class MasterController : MonoBehaviour
     {
         endPhase();
         MainUi.SetActive(false);
-        LoseScreen.SetActive(true);
+        WinScreen.SetActive(true);
         CombatMusic.Stop();
         GameOverSound.Play();
         GameObject.Destroy(MainUi);

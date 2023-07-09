@@ -18,6 +18,15 @@ public class FightManager : MonoBehaviour
     float timeSinceLastTurn = 0f;
     bool isHeroTurn = false;
 
+    public AudioSource heroAttackSound;
+    public AudioSource heroHitSound;
+    public AudioSource goblinAttackSound;
+    public AudioSource bigGoonAttackSound;
+    public AudioSource goblinHitSound;
+    public AudioSource bigGoonHitSound;
+    public AudioSource goblinDieSound;
+    public AudioSource bigGoonDieSound;
+
     int minionAtk = 0;
     int heroAtk = 0;
     int minionDef = 0;
@@ -58,6 +67,18 @@ public class FightManager : MonoBehaviour
             }
             else
             {
+                if (minion.getHealth()<=0)
+                {
+                    if (minion.name == "3 Gobalins")
+                    {
+                        goblinDieSound.Play();
+                    }
+                    else
+                    {
+                        bigGoonDieSound.Play();
+                    }
+                }
+                
                 isFightPhase = false;
             }
         }
@@ -68,11 +89,29 @@ public class FightManager : MonoBehaviour
         if (isHeroTurn)
         {
             heroTurn();
+            heroAttackSound.Play();
+            if (minion.name == "3 Gobalins")
+            {
+                goblinHitSound.Play();
+            }
+            else
+            {
+                bigGoonHitSound.Play();
+            }
             isHeroTurn = false;
         }
         else
         {
             minionTurn();
+            heroHitSound.Play();
+            if(minion.name == "3 Gobalins")
+            {
+                goblinAttackSound.Play();
+            }
+            else
+            {
+                bigGoonAttackSound.Play();
+            }
             isHeroTurn = true;
         }
     }
