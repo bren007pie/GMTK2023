@@ -31,6 +31,8 @@ public class LayoutController : MonoBehaviour
             EndPlacementButton.SetActive(true); // turn on button until done placing
 
             pick_up_and_drag(); // execute clicking up and down action
+
+            tool_tip_over();
         }
 
 
@@ -48,14 +50,14 @@ public class LayoutController : MonoBehaviour
     void pick_up_and_drag()
     {
         // function scoped state variables 
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition); // converts mouse position from pixel space to screen space
         RoomControl roomControl; // for the selected room to insert data
         GameObject insideResource; // for resources inside rooms, so doesn't conflict with selectedResource loop
 
         // Raycast, does every loop unfortunately but what can you do. Could be optimized to only do when mouse is down
         Collider2D targetResource = Physics2D.OverlapPoint(mousePosition, resource); // resource colider cast, only checks on the resource layer mask
         Collider2D targetROOM = Physics2D.OverlapPoint(mousePosition, room); // room colider cast, only checks room layer mask
-
+        
         if (Input.GetMouseButtonDown(0))
         {
             if (targetResource)
@@ -120,6 +122,16 @@ public class LayoutController : MonoBehaviour
             selectedResource = null; // drops the selected thing
         }
 
+    }
+
+    // Having the description pop up in map view
+    void tool_tip_over()
+    {
+
+    }
+
+    void spawnDescriptionBox(Vector3 tipPoint)
+    {
 
     }
 }

@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Descriptor : MonoBehaviour
 {
-    public string description = "";
-    // Start is called before the first frame update
-    void Start()
+    string description = "";
+
+    public string get_map_description()
     {
+        description = "";
         if (gameObject.TryGetComponent<Trap>(out Trap trap))
         {
             if (trap.ATK_bonus_debuff < 0)
@@ -23,13 +24,13 @@ public class Descriptor : MonoBehaviour
         {
             description = minion.name + "\nHP " + minion.getMaxHealth() + "\nATK " + minion.getATK_mult() + "D" + minion.getATK_die() + " + " + minion.getATK_bonus() + "\n DEF D" + minion.getDEF_die() + " + " + minion.getDEF_bonus();
         }
-        else if (gameObject.TryGetComponent<PowerUp>(out  PowerUp powerUp))
+        else if (gameObject.TryGetComponent<PowerUp>(out PowerUp powerUp))
         {
             if (powerUp.healing > 0)
             {
                 description = "Potion\n" + powerUp.healing + "HP";
             }
-            else if(powerUp.atk_die > 0)
+            else if (powerUp.atk_die > 0)
             {
                 description = "Sword\n+ D" + powerUp.atk_die + " + " + powerUp.atk_bonus;
             }
@@ -38,11 +39,6 @@ public class Descriptor : MonoBehaviour
                 description = "Shield\n+ D" + powerUp.def_die + " + " + powerUp.def_bonus;
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return description;
     }
 }
