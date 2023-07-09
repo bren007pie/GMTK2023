@@ -8,6 +8,15 @@ public class FightManager : MonoBehaviour
     Hero hero;
     public Minion minion;
     public bool isFightPhase = false;
+    public float turnTime = 0.5f;
+    public Transform heroBar;
+    public Transform minionBar;
+    Vector3 heroBarStart;
+    Vector3 minionBarStart;
+    Vector3 heroBarEnd;
+    Vector3 minionBarEnd;
+    float timeSinceLastTurn = 0f;
+    bool isHeroTurn = false;
 
     int minionAtk = 0;
     int heroAtk = 0;
@@ -18,6 +27,12 @@ public class FightManager : MonoBehaviour
     void Start()
     {
         hero = FindAnyObjectByType<Hero>().GetComponent<Hero>();
+
+
+        heroBarStart = heroBar.transform.position;
+        heroBarEnd = heroBarStart + Vector3.left * 11f;
+        minionBarStart = minionBar.transform.position;
+        minionBarEnd = minionBarStart + Vector3.right * 11f;
     }
 
     // Update is called once per frame
@@ -25,9 +40,20 @@ public class FightManager : MonoBehaviour
     {
         if (isFightPhase)
         {
+            if(timeSinceLastTurn == 0f)
+            {
+                timeSinceLastTurn = Time.time;
+            }
+
             if (hero.getHealth() > 0 && minion.getHealth() > 0)
             {
-                turn();
+                if(Time.time - timeSinceLastTurn > turnTime)
+                {
+                    turn();
+                    timeSinceLastTurn = Time.time;
+                    heroBar.position = Vector3.Lerp(heroBarEnd, heroBarStart, (float)hero.getHealth() / (float)hero.getMaxHealth());
+                    minionBar.position = Vector3.Lerp(minionBarEnd, minionBarStart, (float)minion.getHealth() / (float)minion.getMaxHealth());
+                }
             }
             else
             {
@@ -38,8 +64,16 @@ public class FightManager : MonoBehaviour
 
     void turn()
     {
-        minionTurn();
-        heroTurn();
+        if (isHeroTurn)
+        {
+            heroTurn();
+            isHeroTurn = false;
+        }
+        else
+        {
+            minionTurn();
+            isHeroTurn = true;
+        }
     }
 
     void minionTurn()
