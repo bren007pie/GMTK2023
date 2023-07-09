@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System;
 
 public class Hero : MonoBehaviour
 {
@@ -12,6 +14,10 @@ public class Hero : MonoBehaviour
     [SerializeField] int ATK_die = 8;
     [SerializeField] int ATK_bonus = 2;
 
+    [SerializeField] TMP_Text HPText;
+    [SerializeField] TMP_Text ATKText;
+    [SerializeField] TMP_Text DEFText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +28,9 @@ public class Hero : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HPText.text = Health + "/" + MaxHealth;
+        ATKText.text = "D" + ATK_die + " + " + ATK_bonus;
+        DEFText.text = "D" + DEF_die + " + " + DEF_bonus;
 
     }
 
