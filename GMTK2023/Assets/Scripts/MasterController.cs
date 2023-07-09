@@ -24,6 +24,12 @@ public class MasterController : MonoBehaviour
     public GameObject BigGoob;
     public GameObject ThreeGobalins;
 
+    // Music
+    public AudioSource PlaceMusic;
+    public AudioSource CombatMusic;
+    public AudioSource GameOverSound;
+    public AudioSource BossVictorySound;
+
     // flags for controlling phases
     bool isSetupPhase = true;
     bool isLayoutPhase = false;
@@ -98,6 +104,8 @@ public class MasterController : MonoBehaviour
         if(minionInCurrentRoom != null) { 
             fightManager.minion = minionInCurrentRoom; 
             fightManager.isFightPhase = true;
+
+
 
             // making screen active, only goes when isFightPhase is active
             CombatView.SetActive(true); // combat screen up
@@ -184,6 +192,9 @@ public class MasterController : MonoBehaviour
         // while wait and hand over "control" to the layout phase
         if (layoutController.isLayoutPhase == false)
         {
+            // Changing music when exiting layout phase
+            PlaceMusic.Stop();
+            CombatMusic.Play();
             endPhase();
             startWalkingPhase();
         }

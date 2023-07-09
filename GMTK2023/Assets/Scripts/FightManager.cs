@@ -40,6 +40,7 @@ public class FightManager : MonoBehaviour
     {
         if (isFightPhase)
         {
+            // sound effects here in fight script
             if(timeSinceLastTurn == 0f)
             {
                 timeSinceLastTurn = Time.time;
