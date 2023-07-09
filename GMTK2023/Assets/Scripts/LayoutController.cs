@@ -31,8 +31,6 @@ public class LayoutController : MonoBehaviour
             EndPlacementButton.SetActive(true); // turn on button until done placing
 
             pick_up_and_drag(); // execute clicking up and down action
-
-            tool_tip_over();
         }
 
 
@@ -124,14 +122,6 @@ public class LayoutController : MonoBehaviour
 
     }
 
-    // Having the description pop up in map view
-    void tool_tip_over()
-    {
 
-    }
 
-    void spawnDescriptionBox(Vector3 tipPoint)
-    {
-
-    }
 }
