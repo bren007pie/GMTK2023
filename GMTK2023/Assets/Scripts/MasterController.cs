@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class MasterController : MonoBehaviour
@@ -23,6 +24,11 @@ public class MasterController : MonoBehaviour
     public GameObject CombatView; // The Parent object of all the combat ones
     public GameObject BigGoob;
     public GameObject ThreeGobalins;
+
+    // UI screens
+    public GameObject MainUi;
+    public GameObject WinScreen;
+    public GameObject LoseScreen;
 
     // Music
     public AudioSource PlaceMusic;
@@ -108,6 +114,7 @@ public class MasterController : MonoBehaviour
 
 
             // making screen active, only goes when isFightPhase is active
+            MainUi.SetActive(false);
             CombatView.SetActive(true); // combat screen up
             if (minionInCurrentRoom.name == "Big Goob")
             {
@@ -148,6 +155,7 @@ public class MasterController : MonoBehaviour
         {
             if(hero.getHealth() > 0 && powerUpInCurrentRoom != null) { handlePowerup(); }
             CombatView.SetActive(false); // combat screen down and remove goblins
+            MainUi.SetActive(true);
             BigGoob.SetActive(false);
             ThreeGobalins.SetActive(false);
             endPhase();
@@ -309,11 +317,27 @@ public class MasterController : MonoBehaviour
 
     private void win()
     {
-
+        endPhase();
+        MainUi.SetActive(false);
+        WinScreen.SetActive(true);
+        CombatMusic.Stop();
+        BossVictorySound.Play();
+        GameObject.Destroy(MainUi); // Fuckin nuke it
+        GameObject.Destroy(fightManager);
+        Time.timeScale = 0f; // pauses game so we don't have to fix a bug!
+        GameObject.Destroy(this);
     }
     private void lose()
     {
-
+        endPhase();
+        MainUi.SetActive(false);
+        LoseScreen.SetActive(true);
+        CombatMusic.Stop();
+        GameOverSound.Play();
+        GameObject.Destroy(MainUi);
+        GameObject.Destroy(fightManager);
+        Time.timeScale = 0f; // pauses game so we don't have to fix a bug!
+        GameObject.Destroy(this);
     }
 
 }
