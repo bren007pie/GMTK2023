@@ -8,7 +8,7 @@ public class Descriptor : MonoBehaviour
     // Descripton box state variables
     [SerializeField] GameObject descriptorBox;
     [Tooltip("The offset of the tip")]
-    public Vector3 tipOffset = new Vector3(82.5f, 79.0f, 0.0f); 
+    public Vector3 tipOffset = new Vector3(90.0f, 79.0f, 0.0f); 
     Text descriptorBoxText;
     RectTransform descriptorBoxPosition;
 
@@ -18,7 +18,7 @@ public class Descriptor : MonoBehaviour
     {
         descriptorBoxText = descriptorBox.GetComponentInChildren<Text>();
         descriptorBoxPosition = descriptorBox.GetComponentInChildren<RectTransform>();
-        tipOffset = new Vector3(82.5f, 79.0f, 0.0f);
+        tipOffset = new Vector3(90.0f, 79.0f, 0.0f);
     }
 
     public string get_map_description()
@@ -28,30 +28,33 @@ public class Descriptor : MonoBehaviour
         {
             if (trap.ATK_bonus_debuff < 0)
             {
-                description = "Bear trap\n-" + trap.ATK_bonus_debuff + " to ATK";
+                description = "Bear trap\n" + trap.ATK_bonus_debuff + " ATK";
             }
             else if (trap.DEF_bonus_debuff < 0)
             {
-                description = "Acid vat\n-" + trap.DEF_bonus_debuff + " to DEF";
+                description = "Acid vat\n" + trap.DEF_bonus_debuff + " DEF";
             }
         }
         else if (gameObject.TryGetComponent<Minion>(out Minion minion))
         {
-            description = minion.name + "\nHP " + minion.getHealth() + "/" + minion.getMaxHealth() + "\nATK " + minion.getATK_mult() + "D" + minion.getATK_die() + " + " + minion.getATK_bonus() + "\n DEF D" + minion.getDEF_die() + " + " + minion.getDEF_bonus();
+            description = minion.name + 
+                    "\nHP " + minion.getHealth() + "/" + minion.getMaxHealth() 
+                        + "\nATK " + minion.getATK_mult() + "D" + minion.getATK_die() + "+" + minion.getATK_bonus() 
+                        + "\nDEF D" + minion.getDEF_die() + "+" + minion.getDEF_bonus();
         }
         else if (gameObject.TryGetComponent<PowerUp>(out PowerUp powerUp))
         {
             if (powerUp.healing > 0)
             {
-                description = "Potion\n" + powerUp.healing + "HP";
+                description = "Potion\n+" + powerUp.healing + " HP";
             }
             else if (powerUp.atk_die > 0)
             {
-                description = "Sword\n+ D" + powerUp.atk_die + " + " + powerUp.atk_bonus;
+                description = "Sword\n +D" + powerUp.atk_die + "+" + powerUp.atk_bonus + " ATK";
             }
             else if (powerUp.def_die > 0)
             {
-                description = "Shield\n+ D" + powerUp.def_die + " + " + powerUp.def_bonus;
+                description = "Shield\n+D" + powerUp.def_die + "+" + powerUp.def_bonus + " DEF";
             }
         }
         else if (gameObject.TryGetComponent<Hero>(out Hero hero))
